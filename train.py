@@ -112,9 +112,7 @@ with torch.no_grad(): # efficiency (no gradients needed)
         | 1.2     | 0.5     | 2.1     | ... | -0.3    | --> torch max returns 2.1 (highest confidence so predict 2)
         '''
         total += labels.size(0)
-        if (predicted == labels):
-            correct += 1
-
+        correct += (predicted == labels).sum().item() # changed comparison because cant compare tensors
         
 # Print test accuracy
 print(f"Test Accuracy: {100 * correct / total:.2f}%")
